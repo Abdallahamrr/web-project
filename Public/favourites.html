@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Favourites - Food Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="favourites.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="index.html" class="logo-link">
+        <h1 class="logo">Food Time</h1>
+      </a>
+
+      <div class="sidebar-menu">
+        <a href="index.html"
+          ><ion-icon name="storefront-outline"></ion-icon>Home</a
+        >
+        <a href="index.html#main-menu"
+          ><ion-icon name="fast-food-outline"></ion-icon>Menu</a
+        >
+        <a href="favourites.html" class="active">
+          <ion-icon name="bookmark-outline"></ion-icon>Favourites</a
+        >
+        <a href="cart.html"> <ion-icon name="cart-outline"></ion-icon>Cart</a>
+        <!-- <a href="#">
+          <ion-icon name="chatbubbles-outline"></ion-icon>Contact us</a
+        > -->
+        <a href="#"
+          ><ion-icon name="information-circle-outline"></ion-icon>About</a
+        >
+      </div>
+
+      <div class="sidebar-logout">
+        <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="main-navbar">
+        <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+
+        <div class="search">
+          <input type="text" placeholder="Search for dishes" />
+          <button class="search-btn">Search</button>
+        </div>
+
+        <div class="profile">
+          <div class="cart-wrapper">
+            <a class="cart" href="cart.html" id="cartButton">
+              <ion-icon name="cart-outline"></ion-icon>
+              <span class="cart-count" id="cartCount">0</span>
+            </a>
+          </div>
+
+          <div class="user-dropdown">
+            <a class="user" href="#" id="profileDropdownBtn">
+              <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <div class="dropdown-menu" id="profileDropdownMenu">
+              <a href="login.html">Login</a>
+              <a href="signup.html">Signup</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="favourites-page">
+        <div class="favourites-header">
+          <h1>Your Favourite Items</h1>
+          <button class="clear-favourites" id="clearAllFavourites">
+            Clear All
+          </button>
+        </div>
+
+        <div id="favouritesContainer" class="favourites-container"></div>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileBtn = document.getElementById("profileDropdownBtn");
+        const dropdownMenu = document.getElementById("profileDropdownMenu");
+        const cartCount = document.getElementById("cartCount");
+
+        profileBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdownMenu.style.display =
+            dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (e) {
+          if (
+            !profileBtn.contains(e.target) &&
+            !dropdownMenu.contains(e.target)
+          ) {
+            dropdownMenu.style.display = "none";
+          }
+        });
+
+        const menuToggle = document.querySelector(".menu-toggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        menuToggle.addEventListener("click", function () {
+          sidebar.classList.toggle("show");
+        });
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cartCount.textContent = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+
+        let favourites = JSON.parse(localStorage.getItem("favourites")) || [];
+        const favouritesContainer = document.getElementById(
+          "favouritesContainer"
+        );
+        const clearAllBtn = document.getElementById("clearAllFavourites");
+
+        function updateFavouritesPage() {
+          if (favourites.length === 0) {
+            favouritesContainer.innerHTML = `
+                        <div class="empty-favourites">
+                            <ion-icon name="bookmark-outline"></ion-icon>
+                            <p>You haven't added any favourites yet</p>
+                            <a href="index.html#main-menu" class="browse-button">Browse Menu</a>
+                        </div>
+                    `;
+          } else {
+            favouritesContainer.innerHTML = `
+                        <div class="favourites-grid">
+                            ${favourites
+                              .map(
+                                (item) => `
+                                <div class="favourite-card" data-id="${
+                                  item.id
+                                }">
+                                    <div class="fav-image-container">
+                                        <img src="${item.image}" alt="${
+                                  item.name
+                                }" class="fav-image">
+                                        <button class="remove-favourite" data-id="${
+                                          item.id
+                                        }">
+                                            <ion-icon name="close-outline"></ion-icon>
+                                        </button>
+                                    </div>
+                                    <div class="fav-details">
+                                        <h3 class="fav-name">${item.name}</h3>
+                                        <p class="fav-desc">${
+                                          item.description || ""
+                                        }</p>
+                                        <div class="fav-bottom">
+                                            <span class="fav-price">${
+                                              item.price
+                                            }</span>
+                                            <button class="add-to-cart" data-id="${
+                                              item.id
+                                            }">
+                                                Add to Cart
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    `;
+
+            document.querySelectorAll(".remove-favourite").forEach((btn) => {
+              btn.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent card click
+                const id = this.dataset.id;
+                removeFavourite(id);
+              });
+            });
+
+            document.querySelectorAll(".add-to-cart").forEach((btn) => {
+              btn.addEventListener("click", function (e) {
+                e.stopPropagation(); // Prevent card click
+                const id = this.dataset.id;
+                addToCart(id);
+
+                this.textContent = "Added!";
+                this.classList.add("added");
+
+                setTimeout(() => {
+                  this.textContent = "Add to Cart";
+                  this.classList.remove("added");
+                }, 1500);
+              });
+            });
+
+            document.querySelectorAll(".favourite-card").forEach((card) => {
+              card.addEventListener("click", function () {});
+            });
+          }
+        }
+
+        function removeFavourite(id) {
+          favourites = favourites.filter((item) => item.id !== id);
+          localStorage.setItem("favourites", JSON.stringify(favourites));
+          updateFavouritesPage();
+        }
+
+        function addToCart(id) {
+          const item = favourites.find((item) => item.id === id);
+
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+          const existingItem = cart.find((cartItem) => cartItem.id === id);
+
+          if (existingItem) {
+            existingItem.quantity++;
+          } else {
+            cart.push({
+              id: item.id,
+              name: item.name,
+              price: item.price,
+              image: item.image,
+              quantity: 1,
+            });
+          }
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+
+          cartCount.textContent = cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
+        }
+
+        clearAllBtn.addEventListener("click", function () {
+          favourites = [];
+          localStorage.setItem("favourites", JSON.stringify(favourites));
+          updateFavouritesPage();
+        });
+
+        updateFavouritesPage();
+      });
+    </script>
+  </body>
+</html>

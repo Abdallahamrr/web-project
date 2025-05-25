@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart - Food Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="cart.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="index.html" class="logo-link">
+        <h1 class="logo">Food Time</h1>
+      </a>
+
+      <div class="sidebar-menu">
+        <a href="index.html"
+          ><ion-icon name="storefront-outline"></ion-icon>Home</a
+        >
+        <a href="index.html#main-menu"
+          ><ion-icon name="fast-food-outline"></ion-icon>Menu</a
+        >
+        <a href="#"> <ion-icon name="bookmark-outline"></ion-icon>Favourites</a>
+        <a href="cart.html" class="active">
+          <ion-icon name="cart-outline"></ion-icon>Cart</a
+        >
+        <!-- <a href="#">
+          <ion-icon name="chatbubbles-outline"></ion-icon>Contact us</a
+        > -->
+        <a href="#"
+          ><ion-icon name="information-circle-outline"></ion-icon>About</a
+        >
+      </div>
+
+      <div class="sidebar-logout">
+        <a href="#"><ion-icon name="log-out-outline"></ion-icon>Logout</a>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="main-navbar">
+        <ion-icon class="menu-toggle" name="menu-outline"></ion-icon>
+
+        <div class="search">
+          <input type="text" placeholder="Search for dishes" />
+          <button class="search-btn">Search</button>
+        </div>
+
+        <div class="profile">
+          <div class="cart-wrapper">
+            <a class="cart" href="#" id="cartButton">
+              <ion-icon name="cart-outline"></ion-icon>
+              <span class="cart-count" id="cartCount">0</span>
+            </a>
+          </div>
+
+          <div class="user-dropdown">
+            <a class="user" href="#" id="profileDropdownBtn">
+              <ion-icon name="person-outline"></ion-icon>
+            </a>
+            <div class="dropdown-menu" id="profileDropdownMenu">
+              <a href="login.html">Login</a>
+              <a href="signup.html">Signup</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cart-page">
+        <div class="cart-header">
+          <a href="index.html" class="continue-shopping">
+            <ion-icon name="arrow-back-outline"></ion-icon> Continue Shopping
+          </a>
+          <h1>Your Cart</h1>
+        </div>
+
+        <div id="cartContainer"></div>
+      </div>
+    </div>
+
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileBtn = document.getElementById("profileDropdownBtn");
+        const dropdownMenu = document.getElementById("profileDropdownMenu");
+
+        profileBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          dropdownMenu.style.display =
+            dropdownMenu.style.display === "block" ? "none" : "block";
+        });
+
+        document.addEventListener("click", function (e) {
+          if (
+            !profileBtn.contains(e.target) &&
+            !dropdownMenu.contains(e.target)
+          ) {
+            dropdownMenu.style.display = "none";
+          }
+        });
+
+        const menuToggle = document.querySelector(".menu-toggle");
+        const sidebar = document.querySelector(".sidebar");
+
+        menuToggle.addEventListener("click", function () {
+          sidebar.classList.toggle("show");
+        });
+
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartContainer = document.getElementById("cartContainer");
+        const cartCount = document.getElementById("cartCount");
+
+        cartCount.textContent = cart.reduce(
+          (total, item) => total + item.quantity,
+          0
+        );
+
+        function updateCartPage() {
+          if (cart.length === 0) {
+            cartContainer.innerHTML = `
+                        <div class="empty-cart-message">
+                            <ion-icon name="cart-outline" style="font-size: 4rem; color: var(--softgreencolor);"></ion-icon>
+                            <p>Your cart is empty</p>
+                            <a href="index.html#main-menu" class="checkout-button" style="display: inline-block; max-width: 250px; margin-top: 2rem;">
+                                Browse Menu
+                            </a>
+                        </div>
+                    `;
+          } else {
+            const subtotal = cart.reduce((sum, item) => {
+              const price = parseFloat(item.price.replace(/[^0-9.]/g, ""));
+              return sum + price * item.quantity;
+            }, 0);
+
+            const deliveryFee = 2.99;
+
+            const tax = subtotal * 0.1;
+
+            const total = subtotal + deliveryFee + tax;
+
+            cartContainer.innerHTML = `
+                        <table class="cart-table">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="cartItemsList">
+                                ${cart
+                                  .map((item) => {
+                                    const price = parseFloat(
+                                      item.price.replace(/[^0-9.]/g, "")
+                                    );
+                                    const itemTotal = price * item.quantity;
+
+                                    return `
+                                        <tr class="cart-item-row" data-id="${
+                                          item.id
+                                        }">
+                                            <td>
+                                                <img src="${item.image}" alt="${
+                                      item.name
+                                    }" class="cart-item-image">
+                                            </td>
+                                            <td class="item-name">${
+                                              item.name
+                                            }</td>
+                                            <td class="item-price">${
+                                              item.price
+                                            }</td>
+                                            <td>
+                                                <div class="quantity-controls">
+                                                    <button class="qty-btn decrease-btn" data-id="${
+                                                      item.id
+                                                    }">-</button>
+                                                    <span class="qty-value">${
+                                                      item.quantity
+                                                    }</span>
+                                                    <button class="qty-btn increase-btn" data-id="${
+                                                      item.id
+                                                    }">+</button>
+                                                </div>
+                                            </td>
+                                            <td class="item-total">$${itemTotal.toFixed(
+                                              2
+                                            )}</td>
+                                            <td>
+                                                <button class="delete-btn" data-id="${
+                                                  item.id
+                                                }">
+                                                    <ion-icon name="trash-outline"></ion-icon>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                  })
+                                  .join("")}
+                            </tbody>
+                        </table>
+                        
+                        <div class="cart-summary">
+                            <h2 class="summary-title">Order Summary</h2>
+                            <div class="summary-row">
+                                <span class="summary-label">Subtotal</span>
+                                <span class="summary-value">$${subtotal.toFixed(
+                                  2
+                                )}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Delivery Fee</span>
+                                <span class="summary-value">$${deliveryFee.toFixed(
+                                  2
+                                )}</span>
+                            </div>
+                            <div class="summary-row">
+                                <span class="summary-label">Tax (10%)</span>
+                                <span class="summary-value">$${tax.toFixed(
+                                  2
+                                )}</span>
+                            </div>
+                            <div class="promo-code">
+                                <input type="text" placeholder="Promo Code" class="promo-input">
+                                <button class="apply-btn">Apply</button>
+                            </div>
+                            <div class="summary-row summary-total">
+                                <span class="summary-label">Total</span>
+                                <span class="summary-value">$${total.toFixed(
+                                  2
+                                )}</span>
+                            </div>
+                            <button class="checkout-button">Proceed to Checkout</button>
+                        </div>
+                    `;
+
+            document.querySelectorAll(".decrease-btn").forEach((btn) => {
+              btn.addEventListener("click", function () {
+                decreaseQuantity(this.dataset.id);
+              });
+            });
+
+            document.querySelectorAll(".increase-btn").forEach((btn) => {
+              btn.addEventListener("click", function () {
+                increaseQuantity(this.dataset.id);
+              });
+            });
+
+            document.querySelectorAll(".delete-btn").forEach((btn) => {
+              btn.addEventListener("click", function () {
+                removeFromCart(this.dataset.id);
+              });
+            });
+          }
+        }
+
+        function decreaseQuantity(id) {
+          const index = cart.findIndex((item) => item.id === id);
+          if (index !== -1) {
+            if (cart[index].quantity > 1) {
+              cart[index].quantity--;
+            } else {
+              cart.splice(index, 1);
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartPage();
+            updateCartCount();
+          }
+        }
+
+        function increaseQuantity(id) {
+          const index = cart.findIndex((item) => item.id === id);
+          if (index !== -1) {
+            cart[index].quantity++;
+            localStorage.setItem("cart", JSON.stringify(cart));
+            updateCartPage();
+            updateCartCount();
+          }
+        }
+
+        function removeFromCart(id) {
+          cart = cart.filter((item) => item.id !== id);
+          localStorage.setItem("cart", JSON.stringify(cart));
+          updateCartPage();
+          updateCartCount();
+        }
+
+        function updateCartCount() {
+          cartCount.textContent = cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
+        }
+
+        updateCartPage();
+      });
+    </script>
+  </body>
+</html>

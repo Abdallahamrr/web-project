@@ -15,7 +15,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(serveStatic(path.join(__dirname, "public")));
+app.use(serveStatic(path.join(__dirname, "Public")));
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/product", productRoutes);

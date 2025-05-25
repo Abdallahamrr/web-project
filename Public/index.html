@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Food Time</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <a href="index.html" class="logo-link">
+        <h1 class="logo">Food Time</h1>
+      </a>
+
+      <div class="sidebar-menu">
+        <a href="#"><ion-icon name="storefront-outline"></ion-icon>Home</a>
+        <a
+          href="#main-menu"
+          onclick="document.getElementById('main-menu').scrollIntoView({ behavior: 'smooth' }); return false;"
+        >
+          <ion-icon name="fast-food-outline"></ion-icon>Menu
+        </a>
+        <a href="favourites.html">
+          <ion-icon name="bookmark-outline"></ion-icon>Favourites</a
+        >
+        <a href="cart.html"> <ion-icon name="cart-outline"></ion-icon>Cart</a>
+        <!-- <a href="#">
+          <ion-icon name="chatbubbles-outline"></ion-icon>Contact us</a
+        > -->
+        <a href="about.html"
+          ><ion-icon name="information-circle-outline"></ion-icon>About</a
+        >
+      </div>
+
+      <div class="sidebar-logout">
+        <a href="login.html" class="reservation"
+          ><ion-icon name="log-out-outline"></ion-icon>Logout</a
+        >
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="main-navbar">
+        <div class="search">
+          <input type="text" placeholder="Search for dishes" />
+          <button class="search-btn">Search</button>
+        </div>
+
+        <div class="profile">
+          <div class="cart-wrapper">
+            <a class="cart" href="cart.html" id="cartButton">
+              <ion-icon name="cart-outline"></ion-icon>
+              <span class="cart-count" id="cartCount">0</span>
+            </a>
+          </div>
+
+          <div class="auth-buttons">
+            <a href="login.html" class="auth-btn login-btn">Login</a>
+            <a href="signup.html" class="auth-btn signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-highlight">
+        <div class="main-header">
+          <h2 class="main-title">Recommendations</h2>
+          <!-- <div class="main-arrow">
+                    <ion-icon class="back"name="chevron-back-circle-outline"></ion-icon>
+                    <ion-icon class="next"name="chevron-forward-circle-outline"></ion-icon>
+                </div> -->
+        </div>
+
+        <div class="highlight-wrapper">
+          <div class="highlight-card">
+            <img
+              class="highlight-image"
+              src="/Images/burger.jpg"
+              alt="burger"
+            />
+            <div class="highlight-desc">
+              <h4>Classic Burger</h4>
+              <p>$7.99</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <img
+              class="highlight-image"
+              src="/Images/NESCAFÉ Cappuccino.jpg"
+              alt="NESCAFÉ"
+            />
+            <div class="highlight-desc">
+              <h4>Cappuccino</h4>
+              <p>$4.55</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <img class="highlight-image" src="/Images/pizza.jpg" alt="pizza" />
+            <div class="highlight-desc">
+              <h4>Margherita Pizza</h4>
+              <p>$10.99</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <img class="highlight-image" src="/Images/salad.jpg" alt="salad" />
+            <div class="highlight-desc">
+              <h4>Salad</h4>
+              <p>$8.99</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <img
+              class="highlight-image"
+              src="/Images/seafood.jpg"
+              alt="seafood"
+            />
+            <div class="highlight-desc">
+              <h4>Seafood Platter</h4>
+              <p>$17.99</p>
+            </div>
+          </div>
+
+          <div class="highlight-card">
+            <img class="highlight-image" src="/Images/steak.jpg" alt="steak" />
+            <div class="highlight-desc">
+              <h4>Ribeye Steak</h4>
+              <p>$21.99</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-menu" id="main-menu">
+        <div class="main-filter">
+          <div>
+            <h2 class="main-title">
+              Menu <br />
+              Category
+            </h2>
+            <div class="main-arrow">
+              <!-- <div class="main-arrow">
+                <ion-icon
+                  class="back-menu"
+                  name="chevron-back-circle-outline"
+                ></ion-icon>
+                <ion-icon
+                  class="next-menu"
+                  name="chevron-forward-circle-outline"
+                ></ion-icon>
+              </div>  -->
+            </div>
+
+            <div class="filter-wrapper">
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="restaurant-outline"></ion-icon>
+                </div>
+                <p>All Menus</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="fast-food-outline"></ion-icon>
+                </div>
+                <p>Burger</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="pizza-outline"></ion-icon>
+                </div>
+                <p>Pizza</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="wine-outline"></ion-icon>
+                </div>
+                <p>Beverage</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="ice-cream-outline"></ion-icon>
+                </div>
+                <p>Ice Cream</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="restaurant-outline"></ion-icon>
+                </div>
+                <p>Pasta</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="fish-outline"></ion-icon>
+                </div>
+                <p>Seafood</p>
+              </div>
+              <div class="filter-card">
+                <div class="filter-icon">
+                  <ion-icon name="nutrition-outline"></ion-icon>
+                </div>
+                <p>Healthy</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="divider" />
+
+        <div class="main-detail">
+          <h2 class="main-title">Choose Your Order</h2>
+          <div class="detail-wrapper">
+            <div class="detail-card" data-category="seafood">
+              <img
+                src="/Images/seafood.jpg"
+                alt="seafood"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Seafood Platter</h4>
+                  <p class="detail-sub">Fresh catch of the day</p>
+                  <p class="price">$17.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="burger">
+              <img src="/Images/burger.jpg" alt="burger" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Classic Burger</h4>
+                  <p class="detail-sub">Angus beef with special sauce</p>
+                  <p class="price">$7.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="pizza">
+              <img src="/Images/pizza.jpg" alt="pizza" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Margherita Pizza</h4>
+                  <p class="detail-sub">Fresh mozzarella & basil</p>
+                  <p class="price">$10.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="steak">
+              <img src="/Images/steak.jpg" alt="steak" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Ribeye Steak</h4>
+                  <p class="detail-sub">Premium cut with herbs</p>
+                  <p class="price">$21.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="healthy">
+              <img src="/Images/salad.jpg" alt="salad" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Caesar Salad</h4>
+                  <p class="detail-sub">Fresh romaine & parmesan</p>
+                  <p class="price">$8.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="beverage">
+              <img
+                src="/Images/NESCAFÉ Cappuccino.jpg"
+                alt="cappuccino"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Cappuccino</h4>
+                  <p class="detail-sub">Rich espresso with foam</p>
+                  <p class="price">$4.55</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="pasta">
+              <img
+                src="/Images/seafood pasta.jpg"
+                alt="pasta"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Seafood Pasta</h4>
+                  <p class="detail-sub">Shrimp & mussels in white wine sauce</p>
+                  <p class="price">$18.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="seafood">
+              <img src="/Images/sushi.jpeg" alt="sushi" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Sushi Combo</h4>
+                  <p class="detail-sub">Fresh salmon & tuna rolls</p>
+                  <p class="price">$22.50</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="ice-cream">
+              <img
+                src="/Images/ice-cream sundae.jpg"
+                alt="ice cream"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Premium Ice Cream</h4>
+                  <p class="detail-sub">Vanilla bean with chocolate sauce</p>
+                  <p class="price">$6.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="sandwich">
+              <img
+                src="/Images/club sandwich.jpg"
+                alt="club sandwich"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Club Sandwich</h4>
+                  <p class="detail-sub">Triple-decker with turkey & bacon</p>
+                  <p class="price">$12.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="pasta">
+              <img src="/Images/ramen.jpg" alt="ramen" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Tonkotsu Ramen</h4>
+                  <p class="detail-sub">
+                    Rich pork broth with chashu & soft-boiled egg
+                  </p>
+                  <p class="price">$14.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="pizza">
+              <img
+                src="/Images/cheese lovers pizza.jpg"
+                alt="cheese lovers pizza"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Cheese Lovers Pizza</h4>
+                  <p class="detail-sub">Loaded with a melty mix of cheeses</p>
+                  <p class="price">$11.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="burger">
+              <img
+                src="/Images/smash burger.jpg"
+                alt="smash burger"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Smash Burger</h4>
+                  <p class="detail-sub">
+                    Juicy, crispy edged beef with melted cheese and house sauce
+                  </p>
+                  <p class="price">$8.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="pizza">
+              <img
+                src="/Images/pepporoni pizza.jpg"
+                alt="pepporoni pizza"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Pepporoni Pizza</h4>
+                  <p class="detail-sub">
+                    Classic pepperoni on cheesy, golden crust
+                  </p>
+                  <p class="price">$12.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="beverage">
+              <img src="/Images/tea.jpg" alt="tea" class="detail-image" />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Mint Tea</h4>
+                  <p class="detail-sub">Freshly brewed and soothing</p>
+                  <p class="price">$1.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="beverage">
+              <img
+                src="/Images/hot chocolate.jpg"
+                alt="hot chocolate"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Hot Chocolate</h4>
+                  <p class="detail-sub">Creamy, rich, and chocolatey</p>
+                  <p class="price">$3.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="ice-cream">
+              <img
+                src="/Images/vanilla ice cream.jpg"
+                alt="vanilla ice-cream"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Vanilla Ice Cream</h4>
+                  <p class="detail-sub">Smooth and classic vanilla</p>
+                  <p class="price">$3.49</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="ice-cream">
+              <img
+                src="/Images/chocolate icecream.jpg"
+                alt="chocolate ice-cream"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Chocolate Ice Cream</h4>
+                  <p class="detail-sub">Rich, creamy chocolate scoop</p>
+                  <p class="price">$3.49</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="beverage">
+              <img
+                src="/Images/Cafe Latte.jpg"
+                alt="latte"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Latte</h4>
+                  <p class="detail-sub">Espresso with steamed milk</p>
+                  <p class="price">$3.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="beverage">
+              <img
+                src="/Images/espresso.jpg"
+                alt="espresso"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Espresso</h4>
+                  <p class="detail-sub">Strong, bold coffee shot</p>
+                  <p class="price">$2.49</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="seafood">
+              <img
+                src="/Images/shrimp platter.jpg"
+                alt="shrimp platter"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Shrimp Platter</h4>
+                  <p class="detail-sub">Tender, seasoned, and juicy</p>
+                  <p class="price">$9.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="healthy">
+              <img
+                src="/Images/fruit salad.jpg"
+                alt="fruit salad"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Fruit Salad</h4>
+                  <p class="detail-sub">Fresh, sweet fruit mix</p>
+                  <p class="price">$4.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="healthy">
+              <img
+                src="/Images/mix grill.webp"
+                alt="mix grill"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Mix Grill</h4>
+                  <p class="detail-sub">Grilled chicken, lamb, beef & kebab</p>
+                  <p class="price">$18.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+
+            <div class="detail-card" data-category="fried-chicken">
+              <img
+                src="/Images/fried chicken.jpeg"
+                alt="fried chicken"
+                class="detail-image"
+              />
+              <div class="detail-desc">
+                <div class="detail-name">
+                  <h4>Crispy Fried Chicken</h4>
+                  <p class="detail-sub">
+                    Korean-style with spicy sauce & pickles
+                  </p>
+                  <p class="price">$16.99</p>
+                  <button class="add-to-cart">Add to cart</button>
+                </div>
+                <ion-icon
+                  class="detail-favourites"
+                  name="bookmark-outline"
+                ></ion-icon>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterCards = document.querySelectorAll(".filter-card");
+        const menuItems = document.querySelectorAll(".detail-card");
+
+        filterCards[0].classList.add("active-filter");
+
+        filterCards.forEach((card) => {
+          card.addEventListener("click", function () {
+            filterCards.forEach((c) => c.classList.remove("active-filter"));
+
+            this.classList.add("active-filter");
+
+            const category = this.querySelector("p")
+              .textContent.toLowerCase()
+              .replace(/\s+/g, "-");
+
+            menuItems.forEach((item) => {
+              if (category === "all-menus") {
+                item.style.display = "block";
+              } else {
+                const itemCategory = item.getAttribute("data-category");
+
+                if (itemCategory === category) {
+                  item.style.display = "block";
+                } else {
+                  item.style.display = "none";
+                }
+              }
+            });
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        const cartCount = document.getElementById("cartCount");
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+        function updateCart() {
+          cartCount.textContent = cart.reduce(
+            (total, item) => total + item.quantity,
+            0
+          );
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+        }
+
+        document
+          .querySelectorAll(".detail-card:not([data-id])")
+          .forEach((card, index) => {
+            card.setAttribute("data-id", `item-${index}`);
+          });
+
+        addToCartButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const card = this.closest(".detail-card");
+            const id = card.getAttribute("data-id");
+            const name = card.querySelector("h4").textContent;
+            const price = card.querySelector(".price").textContent;
+            const image = card.querySelector(".detail-image").src;
+
+            const existingItem = cart.find((item) => item.id === id);
+
+            if (existingItem) {
+              existingItem.quantity++;
+            } else {
+              cart.push({ id, name, price, image, quantity: 1 });
+            }
+
+            this.textContent = "Added!";
+            button.classList.add("added");
+
+            setTimeout(() => {
+              this.textContent = "Add to Cart";
+              button.classList.remove("added");
+            }, 1500);
+
+            updateCart();
+          });
+        });
+
+        updateCart();
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        let favorites = JSON.parse(localStorage.getItem("favourites")) || [];
+
+        const favoriteIcons = document.querySelectorAll(".detail-favourites");
+
+        document
+          .querySelectorAll(".detail-card:not([data-id])")
+          .forEach((card, index) => {
+            card.setAttribute("data-id", `item-${index}`);
+          });
+
+        favoriteIcons.forEach((icon) => {
+          const card = icon.closest(".detail-card");
+          const id = card.getAttribute("data-id");
+          const name = card.querySelector("h4").textContent;
+          const description =
+            card.querySelector(".detail-sub")?.textContent || "";
+          const price = card.querySelector(".price").textContent;
+          const image = card.querySelector(".detail-image").src;
+
+          if (favorites.some((item) => item.id === id)) {
+            icon.setAttribute("name", "bookmark");
+            icon.classList.add("active");
+          }
+
+          icon.addEventListener("click", function (e) {
+            e.stopPropagation(); // Prevent card click
+
+            const isFavorite = icon.getAttribute("name") === "bookmark";
+
+            if (isFavorite) {
+              icon.setAttribute("name", "bookmark-outline");
+              icon.classList.remove("active");
+              favorites = favorites.filter((item) => item.id !== id);
+            } else {
+              icon.setAttribute("name", "bookmark");
+              icon.classList.add("active");
+              favorites.push({ id, name, description, price, image });
+            }
+
+            localStorage.setItem("favourites", JSON.stringify(favorites));
+          });
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get search elements
+        const searchInput = document.querySelector(".search input");
+        const searchBtn = document.querySelector(".search-btn");
+
+        function performSearch() {
+          const searchTerm = searchInput.value.trim().toLowerCase();
+
+          if (!searchTerm) {
+            alert("Please enter a dish name to search");
+            return;
+          }
+
+          const menuItems = document.querySelectorAll(".detail-card");
+
+          let matchFound = false;
+
+          menuItems.forEach((item) => {
+            item.style.display = "block";
+            item.classList.remove("search-highlight");
+          });
+
+          const filterCards = document.querySelectorAll(".filter-card");
+          filterCards.forEach((card) => card.classList.remove("active-filter"));
+          filterCards[0].classList.add("active-filter");
+
+          menuItems.forEach((item) => {
+            const itemName = item.querySelector("h4").textContent.toLowerCase();
+            const itemDesc =
+              item.querySelector(".detail-sub")?.textContent.toLowerCase() ||
+              "";
+
+            if (
+              itemName.includes(searchTerm) ||
+              itemDesc.includes(searchTerm)
+            ) {
+              item.style.display = "block";
+              item.classList.add("search-highlight");
+              matchFound = true;
+
+              if (matchFound === true) {
+                document
+                  .getElementById("main-menu")
+                  .scrollIntoView({ behavior: "smooth" });
+
+                setTimeout(() => {
+                  const firstMatch =
+                    document.querySelector(".search-highlight");
+                  if (firstMatch) {
+                    firstMatch.scrollIntoView({
+                      behavior: "smooth",
+                      block: "center",
+                    });
+                  }
+                }, 500);
+
+                matchFound = "scrolled";
+              }
+            } else {
+              item.style.display = "none";
+            }
+          });
+
+          if (!matchFound) {
+            alert(`No dishes found matching "${searchTerm}"`);
+
+            menuItems.forEach((item) => {
+              item.style.display = "block";
+            });
+          }
+
+          searchInput.value = "";
+        }
+
+        searchBtn.addEventListener("click", performSearch);
+
+        searchInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            performSearch();
+          }
+        });
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const authButtonsContainer = document.querySelector(".auth-buttons");
+        const name = new URLSearchParams(window.location.search).get("name");
+
+        if (name) {
+          // User is logged in, show welcome message
+          authButtonsContainer.innerHTML = `
+            <div class="welcome-user">Welcome, ${name}</div>
+            <a href="login.html" class="auth-btn login-btn">Logout</a>
+          `;
+        }
+      });
+    </script>
+  </body>
+</html>
